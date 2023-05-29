@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import { useRoutes } from "react-router-dom";
+import './assets/scss/styles.scss';
+import Layout from './layouts/Layout';
+import { Navigate } from "react-router-dom";
+import Main from "./views/Main";
+import { Search } from "./views/Search";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+  const routing = useRoutes([
+    {
+      path: "/",
+      element: <Layout />,
+      children: [
+          { path: "/", element: <Navigate to="/main" /> },
+          { path: '/main', element: <Main /> },
+          { path: '/search', element: <Search /> },
+      ]
+    },
+  ]);
+
+  return routing;
+};
 
 export default App;
